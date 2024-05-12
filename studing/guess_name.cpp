@@ -17,16 +17,16 @@ int	main(void)
 		while (name[++i] != '\0' && real_name[i] != '\0')
 		{
 			if (name[i] != real_name[i])
-			{
-				cout << "Isn't my name!" << endl;
 				break;
-			}
 		}
 		if (!name[i] && !real_name[i])
 		{
 			cout << "You did well" << endl;
 			break;
 		}
+		else
+			cout << "Isn't my name!" << endl;
+
 	}
 	return (0);
 }
