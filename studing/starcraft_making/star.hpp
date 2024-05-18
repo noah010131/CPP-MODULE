@@ -24,4 +24,21 @@ class Marine
 	void	status(void);
 };
 
+class Photon_cannon
+{
+	int		hp;
+	int		x;
+	int		y;
+	int		damage;
+	bool	isdead;
+	char	*name;
+
+	public:
+	Photon_cannon(int _x, int _y, const char *pc_name);
+	Photon_cannon(const Photon_cannon& pc, const char *pc_name);
+	~Photon_cannon(void);
+
+	void status(void);
+};
+
 #endif

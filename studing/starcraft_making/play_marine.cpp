@@ -15,6 +15,7 @@ int main(void)
 
 	marine[0]->status();
 	marine[1]->status();
+
 	delete marine[0];
 	delete marine[1];
 }
