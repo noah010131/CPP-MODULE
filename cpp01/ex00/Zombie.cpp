@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/09 14:03:32 by chanypar          #+#    #+#             */
-/*   Updated: 2024/07/11 12:29:35 by chanypar         ###   ########.fr       */
+/*   Created: 2024/07/11 12:48:31 by chanypar          #+#    #+#             */
+/*   Updated: 2024/07/11 13:30:33 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PhoneBook.hpp"
+#include "Zombie.hpp"
 
-int	main(void)
+void	Zombie::announce(void)
 {
-	std::string	command;
-	PhoneBook	pb;
+	std::cout << this->_name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+}
 
-	while (1)
-	{
-		std::cout << "PUT YOUR COMMAND : (ADD, SEARCH, EXIT)" << std::endl;
-		std::cin >> command;
-		if (command == "ADD")
-			pb.AddContact();
-		else if (command == "SEARCH")
-			pb.PrintContact();
-		else if (command == "EXIT")
-			pb.Exit();
-		else
-			std::cout << "command not found..." << std::endl;
-	}
-	return (0);
+Zombie::Zombie(std::string name)
+{
+	this->_name = name;
+}
 
+Zombie::~Zombie(void)
+{
+	std::cout << this->_name << " is dead" << std::endl;
 }

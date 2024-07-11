@@ -6,11 +6,11 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 12:02:08 by chanypar          #+#    #+#             */
-/*   Updated: 2024/07/11 12:14:34 by chanypar         ###   ########.fr       */
+/*   Updated: 2024/07/11 12:28:56 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "phonebook.hpp"
+#include "PhoneBook.hpp"
 
 void	PhoneBook::AddContact(void)
 {

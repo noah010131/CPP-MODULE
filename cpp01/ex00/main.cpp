@@ -5,31 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/09 14:03:32 by chanypar          #+#    #+#             */
-/*   Updated: 2024/07/11 12:29:35 by chanypar         ###   ########.fr       */
+/*   Created: 2024/07/11 13:13:49 by chanypar          #+#    #+#             */
+/*   Updated: 2024/07/11 13:42:34 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PhoneBook.hpp"
+#include "Zombie.hpp"
+
 
 int	main(void)
 {
-	std::string	command;
-	PhoneBook	pb;
-
-	while (1)
-	{
-		std::cout << "PUT YOUR COMMAND : (ADD, SEARCH, EXIT)" << std::endl;
-		std::cin >> command;
-		if (command == "ADD")
-			pb.AddContact();
-		else if (command == "SEARCH")
-			pb.PrintContact();
-		else if (command == "EXIT")
-			pb.Exit();
-		else
-			std::cout << "command not found..." << std::endl;
-	}
+	Zombie *Zombie = newZombie("newzombie");
+	Zombie->announce();
+	randomChump("randomChump");
+	delete(Zombie);
 	return (0);
-
 }

@@ -3,7 +3,7 @@
 
 # include <cstdlib>
 # include <unistd.h>
-# include "contact.hpp"
+# include "Contact.hpp"
 
 class PhoneBook
 {

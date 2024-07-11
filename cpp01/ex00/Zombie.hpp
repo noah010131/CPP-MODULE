@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/09 14:03:32 by chanypar          #+#    #+#             */
-/*   Updated: 2024/07/11 12:29:35 by chanypar         ###   ########.fr       */
+/*   Created: 2024/07/11 12:44:14 by chanypar          #+#    #+#             */
+/*   Updated: 2024/07/11 13:28:04 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PhoneBook.hpp"
+#ifndef ZOMBIE_HPP
+# define ZOMBIE_HPP
 
-int	main(void)
+# include <iostream>
+
+class Zombie
 {
-	std::string	command;
-	PhoneBook	pb;
+	private:
+			std::string	_name;
 
-	while (1)
-	{
-		std::cout << "PUT YOUR COMMAND : (ADD, SEARCH, EXIT)" << std::endl;
-		std::cin >> command;
-		if (command == "ADD")
-			pb.AddContact();
-		else if (command == "SEARCH")
-			pb.PrintContact();
-		else if (command == "EXIT")
-			pb.Exit();
-		else
-			std::cout << "command not found..." << std::endl;
-	}
-	return (0);
+	public:
+			Zombie(std::string name);
+			~Zombie(void);
+			void	announce(void);
+};
 
-}
+void	randomChump(std::string name);
+Zombie	*newZombie(std::string name);
+
+#endif
