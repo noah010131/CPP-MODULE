@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/chanypar/INNER_CERCLE_CHAN/CPP/studing",
-      "program": "/home/chanypar/INNER_CERCLE_CHAN/CPP/studing/build/Debug/outDebug",
+      "cwd": "/home/chanypar/INNER_CERCLE_CHAN/CPP/cpp00/ex00",
+      "program": "/home/chanypar/INNER_CERCLE_CHAN/CPP/cpp00/ex00/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
