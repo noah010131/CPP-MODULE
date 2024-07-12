@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   Weapon.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/11 12:44:14 by chanypar          #+#    #+#             */
-/*   Updated: 2024/07/12 11:45:33 by chanypar         ###   ########.fr       */
+/*   Created: 2024/07/12 12:44:23 by chanypar          #+#    #+#             */
+/*   Updated: 2024/07/12 13:38:23 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP
+#include "Weapon.hpp"
 
-# include <iostream>
-
-class Zombie
+Weapon::Weapon(std::string type)
 {
-	private:
-			std::string	_name;
+	this->_type = type;
+}
 
-	public:
-			Zombie(std::string name);
-			Zombie(void);
-			~Zombie(void);
-			void	announce(void);
-};
+const std::string&	Weapon::getType(void)
+{
+	return (this->_type);
+}
 
-void	randomChump(std::string name);
-Zombie	*newZombie(std::string name);
-
-#endif
+void	Weapon::setType(std::string type)
+{
+	this->_type = type;
+}

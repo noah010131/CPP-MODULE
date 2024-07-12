@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 12:48:31 by chanypar          #+#    #+#             */
-/*   Updated: 2024/07/11 13:30:33 by chanypar         ###   ########.fr       */
+/*   Updated: 2024/07/12 11:31:02 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ void	Zombie::announce(void)
 Zombie::Zombie(std::string name)
 {
 	this->_name = name;
+}
+
+Zombie::Zombie(void)
+{
+	this->_name = "unnamed";
 }
 
 Zombie::~Zombie(void)

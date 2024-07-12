@@ -5,18 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/11 13:13:49 by chanypar          #+#    #+#             */
-/*   Updated: 2024/07/12 11:57:29 by chanypar         ###   ########.fr       */
+/*   Created: 2024/07/12 12:01:18 by chanypar          #+#    #+#             */
+/*   Updated: 2024/07/12 12:13:14 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include <iostream>
 
-int	main(void)
+int main(void)
 {
-	Zombie *Zombie = newZombie("newzombie");
-	Zombie->announce();
-	randomChump("randomChump");
-	delete Zombie;
+	std::string	str = "HI THIS IS BRAIN";
+	std::string *stringPTR = &str;
+	std::string& stringREF = str;
+
+	std::cout << "string memory address : " << &str << std::endl;
+	std::cout << "stringPTR memory address : " << stringPTR << std::endl;
+	std::cout << "stringREF memory address : " << &stringREF << std::endl;
+
+	std::cout << std::endl;
+
+	std::cout << "string value : " << str << std::endl;
+	std::cout << "value pointed by stringPTR : " << *stringPTR << std::endl;
+	std::cout << "value pointed by stringREF : " << stringREF << std::endl;
+
 	return (0);
 }
