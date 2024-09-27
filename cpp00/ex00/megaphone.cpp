@@ -20,6 +20,8 @@ int	main(int ac, char **av)
 				av[i][j] -= 32;
 		}
 		std::cout << av[i];
+		if (i < ac)
+			std::cout << " ";
 	}
 	std::cout << "\n";
 	return (0);
