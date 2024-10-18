@@ -5,31 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/09 14:03:32 by chanypar          #+#    #+#             */
-/*   Updated: 2024/09/27 16:12:36 by chanypar         ###   ########.fr       */
+/*   Created: 2024/10/18 12:14:20 by chanypar          #+#    #+#             */
+/*   Updated: 2024/10/18 12:49:24 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PhoneBook.hpp"
+#include "Fixed.hpp"
 
 int	main(void)
 {
-	std::string	command;
-	PhoneBook	pb;
+	Fixed a;
+	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
 
-	while (1)
-	{
-		std::cout << "PUT YOUR COMMAND : (ADD, SEARCH, EXIT)" << std::endl;
-		std::cin >> command;
-		if (command == "ADD" || command == "add")
-			pb.AddContact();
-		else if (command == "SEARCH" || command == "search")
-			pb.PrintContact();
-		else if (command == "EXIT" || command == "exit")
-			pb.Exit();
-		else
-			std::cout << "command not found..." << std::endl;
-	}
-	return (0);
-
+	std::cout << a << std::endl;
+	std::cout << ++a << std::endl;
+	std::cout << a << std::endl;
+	std::cout << a++ << std::endl;
+	std::cout << a << std::endl;
+	std::cout << b << std::endl;
+	std::cout << Fixed::max( a, b ) << std::endl;
+	return 0;
 }

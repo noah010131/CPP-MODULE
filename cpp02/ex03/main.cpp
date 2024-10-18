@@ -5,31 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/09 14:03:32 by chanypar          #+#    #+#             */
-/*   Updated: 2024/09/27 16:12:36 by chanypar         ###   ########.fr       */
+/*   Created: 2024/10/18 12:56:59 by chanypar          #+#    #+#             */
+/*   Updated: 2024/10/18 13:04:32 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PhoneBook.hpp"
+#include "Point.hpp"
 
 int	main(void)
 {
-	std::string	command;
-	PhoneBook	pb;
+	Point	a(0, 7);
+	Point	b(6, 0);
+	Point	c(0, 0);
+	Point	p(5, 4);
 
-	while (1)
-	{
-		std::cout << "PUT YOUR COMMAND : (ADD, SEARCH, EXIT)" << std::endl;
-		std::cin >> command;
-		if (command == "ADD" || command == "add")
-			pb.AddContact();
-		else if (command == "SEARCH" || command == "search")
-			pb.PrintContact();
-		else if (command == "EXIT" || command == "exit")
-			pb.Exit();
-		else
-			std::cout << "command not found..." << std::endl;
-	}
-	return (0);
+	if (bsp(a, b, c, p))
+		std::cout << "p is in the triangle" << std::endl;
+	else
+		std::cout << "p is out of the triangle" << std::endl;
 
+	return 0;
 }

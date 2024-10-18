@@ -5,31 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/09 14:03:32 by chanypar          #+#    #+#             */
-/*   Updated: 2024/09/27 16:12:36 by chanypar         ###   ########.fr       */
+/*   Created: 2024/09/21 11:11:12 by chanypar          #+#    #+#             */
+/*   Updated: 2024/10/18 14:21:19 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PhoneBook.hpp"
+#include "ScavTrap.hpp"
 
-int	main(void)
+int main (void)
 {
-	std::string	command;
-	PhoneBook	pb;
+	ScavTrap ScavTrap1("ScavTrap1");
+	ClapTrap ClapTrap1("ClapTrap1");
+	ClapTrap ClapTrap2("ClapTrap2");
 
-	while (1)
-	{
-		std::cout << "PUT YOUR COMMAND : (ADD, SEARCH, EXIT)" << std::endl;
-		std::cin >> command;
-		if (command == "ADD" || command == "add")
-			pb.AddContact();
-		else if (command == "SEARCH" || command == "search")
-			pb.PrintContact();
-		else if (command == "EXIT" || command == "exit")
-			pb.Exit();
-		else
-			std::cout << "command not found..." << std::endl;
-	}
+	ClapTrap1.attack("ClapTrap2");
+	ClapTrap2.takeDamage(10);
+	ClapTrap2.beRepaired(10);
+	
+	ClapTrap2.attack("ClapTrap1");
+	ClapTrap1.takeDamage(0);
+	ClapTrap1.beRepaired(8);
+	
+	ScavTrap1.guardGate();
+	ScavTrap1.attack("ClapTrap1");
+	ClapTrap1.takeDamage(20);
+	
 	return (0);
-
 }

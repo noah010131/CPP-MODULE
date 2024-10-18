@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/12 13:46:17 by chanypar          #+#    #+#             */
-/*   Updated: 2024/07/12 21:59:11 by chanypar         ###   ########.fr       */
+/*   Created: 2024/10/18 12:11:43 by chanypar          #+#    #+#             */
+/*   Updated: 2024/10/18 12:12:36 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ReplaceFile.hpp"
+#ifndef FIXED_HPP
+# define FIXED_HPP
 
-int	main(int ac, char **av)
+# include <iostream>
+
+class Fixed
 {
-	if (ac != 4)
-	{
-		std::cout << "This program needs filename and two strings" << std::endl;
-		return (1);
-	}
-	ReplaceF rf(av[1], av[2], av[3]);
+	private:
+		int					value;
+		const static int	bits = 8;
+	public:
+		Fixed(void);
+		~Fixed(void);
+		Fixed(const Fixed& obj);
+		Fixed& operator=(const Fixed& obj);
+		int		getRawBits(void) const;
+		void	setRawBits(int const raw);
+};
 
-	if (rf.readFile())
-		return (0);
-	rf.replaceContext();
-	rf.writeFile();
-	return (0);
-}
+#endif

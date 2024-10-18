@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/12 13:46:17 by chanypar          #+#    #+#             */
-/*   Updated: 2024/07/12 21:59:11 by chanypar         ###   ########.fr       */
+/*   Created: 2024/10/18 14:10:51 by chanypar          #+#    #+#             */
+/*   Updated: 2024/10/18 14:10:53 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ReplaceFile.hpp"
+#ifndef SCAVTRAP_HPP
+# define SCAVTRAP_HPP
 
-int	main(int ac, char **av)
+# include <iostream>
+# include "ClapTrap.hpp"
+
+class ScavTrap : public ClapTrap
 {
-	if (ac != 4)
-	{
-		std::cout << "This program needs filename and two strings" << std::endl;
-		return (1);
-	}
-	ReplaceF rf(av[1], av[2], av[3]);
+ public:
+	ScavTrap(void);
+	ScavTrap(std::string name);
+	ScavTrap(const ScavTrap& obj);
+	ScavTrap& operator=(const ScavTrap& obj);
+	~ScavTrap(void);
+	void guardGate(void);
+	void attack(std::string const& target);
+};
 
-	if (rf.readFile())
-		return (0);
-	rf.replaceContext();
-	rf.writeFile();
-	return (0);
-}
+#endif
