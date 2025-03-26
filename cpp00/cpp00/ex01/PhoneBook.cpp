@@ -6,15 +6,17 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 12:02:08 by chanypar          #+#    #+#             */
-/*   Updated: 2024/09/27 16:11:27 by chanypar         ###   ########.fr       */
+/*   Updated: 2025/03/26 13:53:39 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
+PhoneBook::PhoneBook() : index(0) { }
+
 void	PhoneBook::AddContact(void)
 {
-	this->contact[index].AddContact();
+	this->contact[index % 8].AddContact();
 	this->index++;
 }
 
