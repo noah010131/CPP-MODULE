@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 12:36:13 by chanypar          #+#    #+#             */
-/*   Updated: 2024/07/12 13:39:26 by chanypar         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:56:30 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ class HumanB
 			Weapon *_Weapon;
 	public:
 			HumanB(std::string name);
-			void	setWeapon(Weapon *Weapon);
+			void	setWeapon(Weapon &Weapon);
 			void	attack(void);
 };
 

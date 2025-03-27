@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 13:12:38 by chanypar          #+#    #+#             */
-/*   Updated: 2024/07/11 13:42:24 by chanypar         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:40:32 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void	randomChump(std::string name)
 {
-	Zombie	*newZombie = new Zombie(name);
+	Zombie	temp(name);
 
-	newZombie->announce();
-	delete(newZombie);
+	temp.announce();
 }
