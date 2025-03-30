@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:53:55 by chanypar          #+#    #+#             */
-/*   Updated: 2024/10/18 17:25:46 by chanypar         ###   ########.fr       */
+/*   Updated: 2025/03/30 20:34:22 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Cat::Cat(void)
 	std::cout << "Cat was born (default constructor)" << std::endl;
 }
 
-Cat::Cat(const Cat& obj)
+Cat::Cat(const Cat& obj) : Animal(obj)
 {
 	this->type = obj.getType();
 	this->brain = new Brain(*obj.brain);

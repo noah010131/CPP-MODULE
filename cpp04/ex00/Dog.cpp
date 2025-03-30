@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:35:01 by chanypar          #+#    #+#             */
-/*   Updated: 2024/10/18 15:49:02 by chanypar         ###   ########.fr       */
+/*   Updated: 2025/03/30 20:31:46 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ Dog::Dog(void)
 	std::cout << "Dog was born (default constructor)" << std::endl;
 }
 
-Dog::Dog(const Dog& obj)
+Dog::Dog(const Dog& obj) : Animal(obj)
 {
 	this->type = obj.getType();
 	std::cout << "Dog was born (copy constructor)" << std::endl;

@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 16:07:58 by chanypar          #+#    #+#             */
-/*   Updated: 2024/10/18 16:09:08 by chanypar         ###   ########.fr       */
+/*   Updated: 2025/03/30 20:32:13 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ WrongCat::WrongCat(void)
 	std::cout << "WrongCat was born (default constructor)" << std::endl;
 }
 
-WrongCat::WrongCat(const WrongCat& obj)
+WrongCat::WrongCat(const WrongCat& obj) : WrongAnimal(obj)
 {
 	this->type = obj.getType();
 	std::cout << "WrongCat was born (copy constructor)" << std::endl;

@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:35:01 by chanypar          #+#    #+#             */
-/*   Updated: 2024/10/18 17:26:50 by chanypar         ###   ########.fr       */
+/*   Updated: 2025/03/30 20:42:57 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Dog::Dog(void)
 	std::cout << "Dog was born (default constructor)" << std::endl;
 }
 
-Dog::Dog(const Dog& obj)
+Dog::Dog(const Dog& obj) : Animal(obj)
 {
 	this->type = obj.getType();
 	this->brain = new Brain(*obj.brain);
@@ -28,6 +28,8 @@ Dog::Dog(const Dog& obj)
 Dog& Dog::operator=(const Dog& obj)
 {
 	this->type = obj.getType();
+	if (this != &obj)
+        delete this->brain;
 	this->brain = new Brain(*obj.brain);
 	std::cout << "Dog was born (operator)" << std::endl;
 	return (*this);
