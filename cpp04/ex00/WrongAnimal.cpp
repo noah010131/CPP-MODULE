@@ -6,11 +6,11 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 16:05:42 by chanypar          #+#    #+#             */
-/*   Updated: 2024/10/18 16:05:45 by chanypar         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:52:36 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
+#include "WrongAnimal.hpp"
 
 WrongAnimal::WrongAnimal(void)
 {
@@ -37,7 +37,7 @@ WrongAnimal::~WrongAnimal(void)
 
 void	WrongAnimal::makeSound(void) const
 {
-	std::cout << type << " make a sound" << std::endl;
+	std::cout << type << " make a sound (WrongAnimal)" << std::endl;
 }
 
 std::string WrongAnimal::getType(void) const

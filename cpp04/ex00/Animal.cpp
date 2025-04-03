@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:16:02 by chanypar          #+#    #+#             */
-/*   Updated: 2024/10/18 15:33:59 by chanypar         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:51:30 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ Animal::~Animal(void)
 
 void	Animal::makeSound(void) const
 {
-	std::cout << type << " make a sound" << std::endl;
+	std::cout << type << " make a sound (Animal)" << std::endl;
 }
 
 std::string Animal::getType(void) const

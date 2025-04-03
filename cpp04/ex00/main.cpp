@@ -6,11 +6,13 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 16:01:33 by chanypar          #+#    #+#             */
-/*   Updated: 2024/10/18 16:07:37 by chanypar         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:43:45 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.hpp"
+#include "WrongAnimal.hpp"
+#include "WrongCat.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
 
@@ -22,15 +24,15 @@ int main(void)
 	const WrongAnimal* wrong = new WrongCat();
 
 	std::cout << std::endl;
-	std::cout << i->getType() << " " << std::endl;
+	std::cout << i->getType() << std::endl;
 	i->makeSound();
-	std::cout << j->getType() << " " << std::endl;
+	std::cout << j->getType() << std::endl;
 	j->makeSound();
-	std::cout << meta->getType() << " " << std::endl;
+	std::cout << meta->getType() << std::endl;
 	meta->makeSound();
 	std::cout << std::endl;
 	
-	std::cout << wrong->getType() << " " << std::endl;
+	std::cout << wrong->getType() << std::endl;
 	wrong->makeSound();
 
 	std::cout << std::endl;

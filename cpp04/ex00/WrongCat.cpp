@@ -6,11 +6,11 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 16:07:58 by chanypar          #+#    #+#             */
-/*   Updated: 2025/03/30 20:32:13 by chanypar         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:52:17 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#include "WrongCat.hpp"
 
 WrongCat::WrongCat(void)
 {
@@ -33,11 +33,6 @@ WrongCat& WrongCat::operator=(const WrongCat& obj)
 WrongCat::~WrongCat(void)
 {
 	std::cout << "WrongCat died by destructor" << std::endl;
-}
-
-void	WrongCat::makeSound(void) const
-{
-	std::cout << "mee...Meow!" << std::endl;
 }
 
 std::string WrongCat::getType(void) const
