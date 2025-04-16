@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:09:06 by chanypar          #+#    #+#             */
-/*   Updated: 2025/04/16 10:11:14 by chanypar         ###   ########.fr       */
+/*   Updated: 2025/04/16 10:06:30 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,11 @@ void Bureaucrat::decrementGrade()
 		throw GradeTooLowException();
 	else
 		_grade++;
+}
+
+void	Bureaucrat::signForm(Form &form)
+{
+	form.beSigned(*this);
 }
 
 std::ostream &operator<<(std::ostream &os, Bureaucrat const &other)

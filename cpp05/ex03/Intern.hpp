@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Intern.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/18 12:14:20 by chanypar          #+#    #+#             */
-/*   Updated: 2025/03/29 16:27:16 by chanypar         ###   ########.fr       */
+/*   Created: 2025/04/16 09:55:27 by chanypar          #+#    #+#             */
+/*   Updated: 2025/04/16 10:02:58 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Fixed.hpp"
+#pragma once
 
-int	main(void)
+#include <string>
+#include <iostream>
+#include "Form.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+
+
+class Intern
 {
-	Fixed a;
-	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
+	private:
 
-	std::cout << a << std::endl;
-	std::cout << ++a << std::endl;
-	std::cout << a << std::endl;
-	std::cout << a++ << std::endl;
-	std::cout << a << std::endl;
-	std::cout << b << std::endl;
-	std::cout << Fixed::max( a, b ) << std::endl;
-	return 0;
-}
+	public:
+		Intern();
+		Intern(const Intern &src);
+		~Intern();
+		Intern &operator=(const Intern &src);
+
+		Form *makeForm(const std::string form, const std::string target);
+};

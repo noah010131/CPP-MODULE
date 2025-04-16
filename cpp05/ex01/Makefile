@@ -1,6 +1,6 @@
-NAME= ex00
+NAME= ex01
 FLAG= -Wall -Wextra -Werror -std=c++98
-SRC= main.cpp Bureaucrat.cpp
+SRC= main.cpp Bureaucrat.cpp Form.cpp
 OBJ= $(SRC:.cpp=.o)
 all : $(NAME)
 
