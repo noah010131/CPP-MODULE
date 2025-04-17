@@ -6,13 +6,12 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:47:33 by chanypar          #+#    #+#             */
-/*   Updated: 2025/04/16 11:07:10 by chanypar         ###   ########.fr       */
+/*   Updated: 2025/04/17 09:48:21 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-// Includes
 #include <string>
 #include <iostream>
 #include <limits>
@@ -28,8 +27,6 @@
 #define FLOAT 5
 #define DOUBLE 6
 
-// classes
-
 class Conversion
 {
 	private:
@@ -40,9 +37,7 @@ class Conversion
 		float _float;
 		double _double;
 
-		// Constructor
 		Conversion();
-		// Methods
 		int checkInput(void);
 		void convertInput(void);
 
@@ -50,33 +45,23 @@ class Conversion
 		void fromInt(void);
 		void fromFloat(void);
 		void fromDouble(void);
-
 		void printOutput(void)const;
-
-		// Getter
 		std::string getInput(void)const;
 		int getType(void)const;
 		char getChar(void)const;
 		int getInt(void)const;
 		float getFloat(void)const;
 		double getDouble(void)const;
-		// Setter
+
 	public:
-	// Constructors
 		Conversion(const std::string input);
 		Conversion(const Conversion &src);
-
-	// Deconstructors
+		Conversion &operator=(const Conversion &src);
 		~Conversion();
 
-	// Overloaded Operators
-		Conversion &operator=(const Conversion &src);
-
-	//Exceptions
 	class ErrorException : public std::exception
 	{
 	public:
 		virtual const char *what() const throw();
 	};
-	// Public Methods
 };
