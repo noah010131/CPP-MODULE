@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:31:59 by chanypar          #+#    #+#             */
-/*   Updated: 2025/04/16 09:57:45 by chanypar         ###   ########.fr       */
+/*   Updated: 2025/06/24 12:43:53 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int main(void)
 {
 	try
 	{
+		std::cout << "test, bureaucrat grade 200" << std::endl;
 		try
 		{
 			Bureaucrat test("test", 200);	
@@ -32,14 +33,20 @@ int main(void)
 		std::cout << b << std::endl;
 		std::cout << std::endl;
 		
+		a.incrementGrade();
+		b.decrementGrade();
+		std::cout << a << std::endl;
+		std::cout << b << std::endl;
+		std::cout << std::endl;
+		
 		a.decrementGrade();
 		b.incrementGrade();
 		std::cout << a << std::endl;
 		std::cout << b << std::endl;
 		std::cout << std::endl;
 
-		a.incrementGrade();
-		b.decrementGrade();
+		a.decrementGrade();
+		b.incrementGrade();
 		std::cout << a << std::endl;
 		std::cout << b << std::endl;
 		std::cout << std::endl;

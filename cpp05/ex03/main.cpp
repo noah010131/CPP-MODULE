@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:31:59 by chanypar          #+#    #+#             */
-/*   Updated: 2025/04/16 10:05:56 by chanypar         ###   ########.fr       */
+/*   Updated: 2025/06/24 13:09:54 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "Intern.hpp"
 
 int main(void)
 {
@@ -195,5 +196,15 @@ int main(void)
 		delete c;
 		std::cout << std::endl;
 	}
+
+	std::cout << "--------------------------------------------------------------------------------------------------------------" << std::endl;
+
+	Intern someIntern;
+
+    Form *form1 = someIntern.makeForm("PresidentialPardonForm", "Alice");
+    if (form1) {
+        std::cout << "executing " << form1->getName() << std::endl;
+        delete form1;
+    }
 	return (0);
 }
