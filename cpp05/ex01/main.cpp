@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:31:59 by chanypar          #+#    #+#             */
-/*   Updated: 2025/04/16 10:07:44 by chanypar         ###   ########.fr       */
+/*   Updated: 2025/07/03 17:30:31 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,133 +15,68 @@
 
 int main(void)
 {
+	/* Create a form with grade too high */
+	Form *form = NULL;
 	{
-		std::cout << "Constructing" << std::endl;
-		Bureaucrat *a = new Bureaucrat();
-		Form *b = new Form();
-		std::cout << std::endl;
-
-		std::cout << "Testing" << std::endl;
-		std::cout << a;
-		std::cout << b;
-
 		try
 		{
-			b->beSigned(*a);
+			form = new Form("A99", 0, 5);
+			std::cout << form << std::endl;
+			
 		}
-		catch(Bureaucrat::GradeTooLowException &e)
+		catch(std::exception &e)
 		{
-			std::cerr << a->getName() << " was not able to sign " << b->getName() << ": " << e.what() << std::endl;
+			std::cerr << e.what() << std::endl;
 		}
-
-		std::cout << b;
-		std::cout << std::endl;
-
-		std::cout << "Deconstructing" << std::endl;
-		delete a;
-		delete b;
-		std::cout << std::endl;
+		
+		delete form;
 	}
-	std::cout << "-------------------------------------------------------" << std::endl;
+
+	std::cout << "\n --------------------- \n\n";
+
+	/* Create form and sign it without exceptions */
+	Bureaucrat *person = NULL;
 	{
-		std::cout << std::endl;
-
-		std::cout << "Constructing" << std::endl;
-		Bureaucrat *a = new Bureaucrat("Assistant", 145);
-		Bureaucrat *b = new Bureaucrat("CEO", 1);
-		Form *c = new Form("Rent Contract", 140, 100);
-		std::cout << std::endl;
-
-		std::cout << "Testing" << std::endl;
-		std::cout << a;
-		std::cout << b;
-		std::cout << c;
-
 		try
 		{
-			c->beSigned(*a);
-			a->signForm(*c);
-		}
-		catch(Bureaucrat::GradeTooLowException &e)
-		{
-			std::cerr << "" << a->getName() << " was not able to sign the Form " << c->getName() << ": " << e.what() << "" << std::endl;
-		}
+			person = new Bureaucrat("Mike", 15);
+			form = new Form("B58", 20, 45);
+			std::cout << person << std::endl;
+			std::cout << form << std::endl;
+			person->signForm(*form);
+			std::cout << form << std::endl;
 
-		std::cout << c;
-		try
-		{
-			c->beSigned(*b);
-			b->signForm(*c);
 		}
-		catch(Bureaucrat::GradeTooLowException &e)
+		catch (std::exception &e)
 		{
-			std::cerr << "" << b->getName() << " was not able to sign the Form " << c->getName() << ": " << e.what() << "" << std::endl;
+			std::cout << e.what() << std::endl;
 		}
-		std::cout << c;
-
-		b->signForm(*c);
-		std::cout << std::endl;
-
-		std::cout << "Deconstructing" << std::endl;
-		delete a;
-		delete b;
-		delete c;
-		std::cout << std::endl;
+		
+		delete person;
+		delete form;
 	}
-	std::cout << "-------------------------------------------------------" << std::endl;
+	
+	std::cout << "\n --------------------- \n\n";
+
+	/* Create form and try to sign it but the grade is not enough */
 	{
-		std::cout << std::endl;
-
-		std::cout << "Constructing" << std::endl;
-		Form *a = NULL;
-
 		try
 		{
-			a = new Form(160, 145);
-		}
-		catch (Form::GradeTooLowException &e)
-		{
-			std::cerr << "Constructing default failed: " <<
-			e.what() << "" << std::endl;
-		}
+			person = new Bureaucrat("thomas", 35);
+			form = new Form("C_303", 20, 45);
+			std::cout << person << std::endl;
+			std::cout << form << std::endl;
+			person->signForm(*form);
+			std::cout << form << std::endl;
 
-		try
-		{
-			a = new Form(145, 160);
 		}
-		catch (Form::GradeTooLowException &e)
+		catch (std::exception &e)
 		{
-			std::cerr << "Constructing default failed: " <<
-			e.what() << "" << std::endl;
+			std::cout << e.what() << std::endl;
 		}
-
-		try
-		{
-			a = new Form(-15, 145);
-		}
-		catch (Form::GradeTooHighException &e)
-		{
-			std::cerr << "Constructing default failed: " <<
-			e.what() << "" << std::endl;
-		}
-
-		try
-		{
-			a = new Form(145, -15);
-		}
-		catch (Form::GradeTooHighException &e)
-		{
-			std::cerr << "Constructing default failed: " <<
-			e.what() << "" << std::endl;
-		}
-
-		if (a != NULL)
-		{
-			std::cout << std::endl;
-			std::cout << "Deconstructing" << std::endl;
-			delete a;
-		}
-		std::cout << std::endl;
+		
+		delete person;
+		delete form;
 	}
 	return (0);
 }

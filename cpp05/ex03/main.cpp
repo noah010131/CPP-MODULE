@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:31:59 by chanypar          #+#    #+#             */
-/*   Updated: 2025/06/24 13:09:54 by chanypar         ###   ########.fr       */
+/*   Updated: 2025/07/03 17:59:35 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,192 +19,53 @@
 
 int main(void)
 {
+	Intern		intern;
+	Form		*form;
+	Bureaucrat	mike("mike", 50);
+
+	// Test how all forms are created properly execpt for the last one
+	try
 	{
-		std::cout << "\033[34mConstructing\033[0m" << std::endl;
-		Bureaucrat *a = new Bureaucrat();
-		Form *b = new PresidentialPardonForm("default");
-		// Form *c = new RobotomyRequestForm();
-		// Form *d = new ShrubberyCreationForm();
-		std::cout << std::endl;
-
-		std::cout << "\033[34mTesting\033[0m" << std::endl;
-		std::cout << a;
-		std::cout << b;
-
-		try
-		{
-			b->beSigned(*a);
-			// b->execute(*a);
-		}
-		catch(Bureaucrat::GradeTooLowException &e)
-		{
-			std::cerr << "\033[33m" << a->getName() << " was not able to sign " << b->getName() << ": " << e.what() << "\033[0m" << std::endl;
-		}
-
-		std::cout << b;
-		std::cout << std::endl;
-
-		std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
-		delete a;
-		delete b;
-		std::cout << std::endl;
+		form = intern.makeForm("RobotomyRequestForm", "Alice");
+		delete form;
+		form = intern.makeForm("ShrubberyCreationForm", "Charlie");
+		delete form;
+		form = intern.makeForm("PresidentialPardonForm", "David");
+		delete form;
+		form = intern.makeForm("SomeRandomForm", "Elisa");
+		delete form;
 	}
-	std::cout << "--------------------------------------------------------------------------------------------------------------" << std::endl;
+	catch (std::exception &e)
 	{
-		std::cout << std::endl;
-
-		std::cout << "\033[34mConstructing\033[0m" << std::endl;
-		Bureaucrat *a = new Bureaucrat("Assistant", 145);
-		Bureaucrat *b = new Bureaucrat("CEO", 1);
-		Form *c = new PresidentialPardonForm("some dude");
-		// Form *d = new Form(*c);
-		// Form *d = new Form("Rent Contract", 140, 100); // you are not able to construct an abstract class here
-		std::cout << std::endl;
-
-		std::cout << "\033[34mTesting\033[0m" << std::endl;
-		std::cout << a;
-		std::cout << b;
-		std::cout << c;
-		std::cout << std::endl;
-
-		// Try to execute before signing
-		try
-		{
-			c->execute(*b);
-		}
-		catch (Form::FormNotSignedException &e)
-		{
-			std::cerr << "\033[33m" << a->getName() << " was not able to execute the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
-		}
-		std::cout << std::endl;
-		// Assistant signs the Form
-		try
-		{
-			c->beSigned(*a);
-			// a->signForm(*c);
-		}
-		catch(Bureaucrat::GradeTooLowException &e)
-		{
-			std::cerr << "\033[33m" << a->getName() << " was not able to sign the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
-		}
-
-		// CEO signs the Form
-		std::cout << std::endl;
-		std::cout << c;
-		std::cout << std::endl;
-		try
-		{
-			c->beSigned(*b);
-			// b->signForm(*c);
-		}
-		// catch(Form::GradeTooLowException &e)
-		catch(Bureaucrat::GradeTooLowException &e)
-		{
-			std::cerr << "\033[33m" << b->getName() << " was not able to sign the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
-		}
-		std::cout << std::endl;
-		std::cout << c;
-		std::cout << std::endl;
-
-		// try signing the from again
-		std::cout << std::endl;
-		b->signForm(*c);
-		std::cout << std::endl;
-
-		// execute the Form from assistant
-		try
-		{
-			c->execute(*a);
-			// a.executeForm(*c);
-		}
-		catch(Bureaucrat::GradeTooLowException &e)
-		{
-			std::cerr << "\033[33m" << a->getName() << " was not able to execute the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
-		}
-		std::cout << std::endl;
-
-		// execute Form from CEO
-		try
-		{
-			c->execute(*b);
-			// b.executeForm(*c);
-		}
-		catch(Bureaucrat::GradeTooLowException &e)
-		{
-			std::cerr << "\033[33m" << b->getName() << " was not able to execute the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
-		}
-		std::cout << std::endl;
-
-		std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
-		delete a;
-		delete b;
-		delete c;
-		std::cout << std::endl;
-	}
-	std::cout << "--------------------------------------------------------------------------------------------------------------" << std::endl;
-	{
-		std::cout << std::endl;
-
-		std::cout << "\033[34mConstructing\033[0m" << std::endl;
-		Bureaucrat *a = new Bureaucrat("Emperor", 1);
-		PresidentialPardonForm *b = new PresidentialPardonForm("this other dude");
-		PresidentialPardonForm *c = new PresidentialPardonForm(*b);
-		std::cout << std::endl;
-
-		std::cout << "\033[34mTesting\033[0m" << std::endl;
-		std::cout << a;
-		std::cout << b;
-		std::cout << c;
-		b->beSigned(*a);
-		a->signForm(*c);
-		b->execute(*a);
-		a->executeForm(*c);
-		// c->execute(*a);
-		std::cout << std::endl;
-
-		std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
-		delete a;
-		delete b;
-		delete c;
-		std::cout << std::endl;
-	}
-	std::cout << "--------------------------------------------------------------------------------------------------------------" << std::endl;
-	{
-		std::cout << std::endl;
-
-		std::cout << "\033[34mConstructing\033[0m" << std::endl;
-		Bureaucrat *a = new Bureaucrat("Emperor", 1);
-		RobotomyRequestForm *b = new RobotomyRequestForm("Bender");
-		ShrubberyCreationForm *c = new ShrubberyCreationForm("christmas");
-		std::cout << std::endl;
-
-		std::cout << "\033[34mTesting\033[0m" << std::endl;
-		std::cout << a;
-		std::cout << b;
-		std::cout << c;
-		b->beSigned(*a);
-		a->signForm(*c);
-		for (int i= 0; i < 10; i++)
-			b->execute(*a);
-		// a->executeForm(*c);
-		c->execute(*a);
-		std::cout << std::endl;
-
-		std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
-		delete a;
-		delete b;
-		delete c;
-		std::cout << std::endl;
+		std::cout << "Caught exception: " << e.what() << std::endl;
 	}
 
-	std::cout << "--------------------------------------------------------------------------------------------------------------" << std::endl;
-
-	Intern someIntern;
-
-    Form *form1 = someIntern.makeForm("PresidentialPardonForm", "Alice");
-    if (form1) {
-        std::cout << "executing " << form1->getName() << std::endl;
-        delete form1;
-    }
+	// Test some Actions with available form
+	std::cout << "------------------------------------" << std::endl;
+	try
+	{
+		form = intern.makeForm("ShrubberyCreationForm", "Fred");
+		form->beSigned(mike);
+		mike.executeForm(*form);
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << "Caught exception: " << e.what() << std::endl;
+	}
+	delete form;
+	
+	std::cout << "------------------------------------" << std::endl;
+	try
+	{
+		form = intern.makeForm("PresidentialPardonForm", "Georgia");
+		mike.signForm(*form);
+		mike.executeForm(*form);
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << "Caught exception: " << e.what() << std::endl;
+	}
+	delete form;
+	
 	return (0);
 }
