@@ -1,5 +1,5 @@
-NAME= ex00
-FLAG= -Wall -Wextra -Werror -std=c++98
+NAME= convert
+FLAG= -Wall -Wextra -Werror -std=c++98 -g
 SRC= main.cpp Conversion.cpp
 OBJ= $(SRC:.cpp=.o)
 all : $(NAME)

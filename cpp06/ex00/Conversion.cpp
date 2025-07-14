@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScalarConverter.cpp                                :+:      :+:    :+:   */
+/*   Conversion.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:49:39 by chanypar          #+#    #+#             */
-/*   Updated: 2025/04/16 11:06:10 by chanypar         ###   ########.fr       */
+/*   Updated: 2025/07/14 15:19:25 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Conversion.hpp"
 
-// Constructors
 Conversion::Conversion()
 {
 	std::cout << "Conversion Default Constructor called" << std::endl;
@@ -33,13 +32,11 @@ Conversion::Conversion(const Conversion &src): _input(src.getInput())
 	this->printOutput();
 }
 
-// Deconstructors
 Conversion::~Conversion()
 {
 	std::cout << "Conversion Deconstructor called" << std::endl;
 }
 
-// Overloaded Operators
 Conversion &Conversion::operator=(const Conversion &src)
 {
 	std::cout << "Conversion Assignation operator called" << std::endl;
@@ -54,41 +51,73 @@ Conversion &Conversion::operator=(const Conversion &src)
 	return *this;
 }
 
-// Private Methods
+std::string	Conversion::getInput(void)const
+{
+	return (this->_input);
+}
+
+int	Conversion::getType(void)const
+{
+	return (this->_type);
+}
+
+char	Conversion::getChar(void)const
+{
+	return (this->_char);
+}
+
+int	Conversion::getInt(void)const
+{
+	return (this->_int);
+}
+
+float	Conversion::getFloat(void)const
+{
+	return (this->_float);
+}
+
+double Conversion::getDouble(void)const
+{
+	return (this->_double);
+}
+
+
 int	Conversion::checkInput()
 {
-	if (this->getInput().compare("nan") == 0 || this->getInput().compare("+inf") == 0 ||
-		this->getInput().compare("-inf") == 0 || this->getInput().compare("+inff") == 0 ||
-		this->getInput().compare("-inff") == 0)
-	{
+	if (this->getInput().compare("nan") == 0 || this->getInput().compare("+inf") == 0
+		|| this->getInput().compare("-inf") == 0 || this->getInput().compare("+inff") == 0
+		|| this->getInput().compare("-inff") == 0)
 		return (NAN_INF);
-	}
-	else if (this->getInput().length() == 1 &&
-		(this->getInput()[0] == '+' || this->getInput()[0] == '-' || // prevents that the input of single digit integers get interpreted as a char
-		this->getInput()[0] == 'f' || this->getInput()[0] == '.'))
-	{
+	if (this->getInput().length() == 1 &&
+		(this->getInput()[0] == '+' || this->getInput()[0] == '-'
+		|| this->getInput()[0] == 'f' || this->getInput()[0] == '.'))
 		return (CHAR);
-	}
-	else if (this->getInput().find_first_of("+-") != this->getInput().find_last_of("+-")) // catches any multiple or mixed use of + and -
+	else if (this->getInput().find_first_of("+-") != this->getInput().find_last_of("+-")
+			|| ((this->getInput().find_first_of("+") != std::string::npos && this->getInput().find_first_of("+") != 0)
+			||	(this->getInput().find_first_of("-") != std::string::npos && this->getInput().find_first_of("-") != 0)))
 		return (ERROR);
 	else if (this->getInput().find_first_not_of("+-0123456789") == std::string::npos)
 		return (INT);
 	else if (this->getInput().find_first_not_of("+-0123456789.") == std::string::npos)
 	{
-		if (this->getInput().find_first_of(".") != this->getInput().find_last_of(".") || // catches `0..0`
-			isdigit(this->getInput()[this->getInput().find_first_of(".") + 1]) == false || // catches `0.`
-			this->getInput().find_first_of(".") == 0) // catches `.0`
+		if (this->getInput().find_first_of(".") != this->getInput().find_last_of(".")
+			|| isdigit(this->getInput()[this->getInput().find_first_of(".") + 1]) == false
+			|| this->getInput().find_first_of(".") == 0 
+			|| (this->getInput()[0] == '+' && this->getInput().find_first_of(".") == 1)
+			|| (this->getInput()[0] == '-' && this->getInput().find_first_of(".") == 1))
 			return (ERROR);
 		else
 			return (DOUBLE);
 	}
 	else if (this->getInput().find_first_not_of("+-0123456789.f") == std::string::npos)
 	{
-		if (this->getInput().find_first_of("f") != this->getInput().find_last_of("f") || // catches `0.0ff`
-			this->getInput().find_first_of(".") != this->getInput().find_last_of(".") || // catches `0..0f`
-			this->getInput().find_first_of("f") - this->getInput().find_first_of(".") == 1 || //catches `0.f`
-			this->getInput().find_first_of(".") == 0 || // catches `.0f`
-			this->getInput()[this->getInput().find_first_of("f") + 1] != '\0') // catches `0.0f0`
+		if (this->getInput().find_first_of("f") != this->getInput().find_last_of("f")
+			|| this->getInput().find_first_of(".") != this->getInput().find_last_of(".")
+			|| this->getInput().find_first_of("f") - this->getInput().find_first_of(".") == 1
+			|| this->getInput().find_first_of(".") == 0
+			|| this->getInput()[this->getInput().find_first_of("f") + 1] != '\0'
+			|| (this->getInput()[0] == '+' && this->getInput().find_first_of(".") == 1)
+			|| (this->getInput()[0] == '-' && this->getInput().find_first_of(".") == 1))
 			return (ERROR);
 		else
 			return (FLOAT);
@@ -152,18 +181,18 @@ void	Conversion::convertInput(void)
 
 void	Conversion::printOutput(void)const
 {
-	// display char
+	// print char
 	if (this->getType() != NAN_INF && this->getDouble() <= UCHAR_MAX && this->getDouble() >= 0)
 	{
 		if (isprint(this->getChar()))
 			std::cout << "char: '" << this->getChar() << "'" << std::endl;
 		else
-			std::cout << "char: Non displayable" << std::endl;
+			std::cout << "char: Non printable" << std::endl;
 	}
 	else
 		std::cout << "char: impossible" << std::endl;
 
-	// display int
+	// print int
 	if (this->getType() != NAN_INF && this->getDouble() >= std::numeric_limits<int>::min() && this->getDouble() <= std::numeric_limits<int>::max())
 	{
 		std::cout << "int: " << this->getInt() << std::endl;
@@ -171,7 +200,7 @@ void	Conversion::printOutput(void)const
 	else
 		std::cout << "int: impossible" << std::endl;
 
-	// display float
+	// print float
 	if (this->getType() != NAN_INF)
 	{
 		std::cout << "float: " << this->getFloat();
@@ -190,7 +219,7 @@ void	Conversion::printOutput(void)const
 			std::cout << "float: -inff" << std::endl;
 	}
 
-	// display double
+	// print double
 	if (this->getType() != NAN_INF)
 	{
 		std::cout << "double: " << this->getDouble();
@@ -213,39 +242,8 @@ void	Conversion::printOutput(void)const
 	}
 }
 
-// Exceptions
 const char *Conversion::ErrorException::what(void) const throw()
 {
-	return ("Error: Impossible to print or input not convertable");
+	return ("Error: your input is not convertable");
 };
 
-// Getter
-std::string	Conversion::getInput(void)const
-{
-	return (this->_input);
-}
-
-int	Conversion::getType(void)const
-{
-	return (this->_type);
-}
-
-char	Conversion::getChar(void)const
-{
-	return (this->_char);
-}
-
-int	Conversion::getInt(void)const
-{
-	return (this->_int);
-}
-
-float	Conversion::getFloat(void)const
-{
-	return (this->_float);
-}
-
-double Conversion::getDouble(void)const
-{
-	return (this->_double);
-}
