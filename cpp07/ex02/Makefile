@@ -1,4 +1,4 @@
-NAME= ex02
+NAME= Array
 FLAG= -Wall -Wextra -Werror -std=c++98
 SRC= main.cpp 
 OBJ= $(SRC:.cpp=.o)
