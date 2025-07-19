@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 10:27:52 by chanypar          #+#    #+#             */
-/*   Updated: 2025/04/17 10:37:08 by chanypar         ###   ########.fr       */
+/*   Updated: 2025/07/19 08:16:38 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@
 template <typename T>
 class Array {
  private:
-	std::size_t len;
+	int length;
 	T *array;
  public:
 	Array(void);
-	Array(std::size_t n);
+	Array(int n);
 	Array(const Array& obj);
 	Array& operator=(const Array& obj);
 	~Array(void);
-	std::size_t size(void) const;
-	T& operator[] (std::size_t i);
-	const T& operator[] (std::size_t i) const;
+	int size(void) const;
+	T& operator[] (int i);
+	const T& operator[] (int i) const;
 };
 
 # include "Array.tpp"

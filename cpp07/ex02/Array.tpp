@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 10:40:40 by chanypar          #+#    #+#             */
-/*   Updated: 2025/04/17 10:40:42 by chanypar         ###   ########.fr       */
+/*   Updated: 2025/07/19 08:31:11 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,27 @@
 #include <iostream>
 
 template <typename T>
-Array<T>::Array(void) : len(0), array(0) {}
+Array<T>::Array(void) : length(0), array(0) {}
 
 template <typename T>
-Array<T>::Array(size_t n) : len(n)
+Array<T>::Array(int n)
 {
-	array = new T[n];
-	for (size_t i = 0; i < n; ++i)
-		array[i] = T(); // 기본값으로 초기화
+	if (n < 0)
+		throw std::invalid_argument("Array size cannot be negative");
+	length = n;
+	if (n == 0)
+		array = 0;
+	else
+		array = new T[n];
+	for (int i = 0; i < n; ++i)
+		array[i] = T();
 }
 
 template <typename T>
-Array<T>::Array(const Array& obj) : len(obj.len)
+Array<T>::Array(const Array& obj) : length(obj.length)
 {
-	array = new T[len];
-	for (size_t i = 0; i < len; ++i)
+	array = new T[length];
+	for (int i = 0; i < length; ++i)
 		array[i] = obj.array[i];
 }
 
@@ -38,9 +44,9 @@ Array<T>& Array<T>::operator=(const Array& obj)
 	if (this != &obj)
 	{
 		delete[] array;
-		len = obj.len;
-		array = new T[len];
-		for (size_t i = 0; i < len; ++i)
+		length = obj.length;
+		array = new T[length];
+		for (int i = 0; i < length; ++i)
 			array[i] = obj.array[i];
 	}
 	return *this;
@@ -53,23 +59,23 @@ Array<T>::~Array(void)
 }
 
 template <typename T>
-size_t Array<T>::size(void) const
+int Array<T>::size(void) const
 {
-	return len;
+	return length;
 }
 
 template <typename T>
-T& Array<T>::operator[](size_t i)
+T& Array<T>::operator[](int i)
 {
-	if (i >= len)
+	if (i < 0 || i >= length)
 		throw std::out_of_range("Index out of bounds");
 	return array[i];
 }
 
 template <typename T>
-const T& Array<T>::operator[](size_t i) const
+const T& Array<T>::operator[](int i) const
 {
-	if (i >= len)
+	if (i < 0 || i >= length)
 		throw std::out_of_range("Index out of bounds");
 	return array[i];
 }
