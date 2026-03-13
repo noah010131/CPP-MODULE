@@ -6,13 +6,13 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 10:23:00 by chanypar          #+#    #+#             */
-/*   Updated: 2025/07/18 17:22:25 by chanypar         ###   ########.fr       */
+/*   Updated: 2026/03/13 13:45:08 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "iter.hpp"
 
-int main()
+int main(void)
 {
 	int intArr[] = {1, 2, 3, 4, 5};
 	std::cout << "Original int array: ";
