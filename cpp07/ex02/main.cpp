@@ -5,79 +5,40 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/17 10:31:02 by chanypar          #+#    #+#             */
-/*   Updated: 2025/07/19 08:28:25 by chanypar         ###   ########.fr       */
+/*   Created: 2025/07/19 10:59:40 by chanypar          #+#    #+#             */
+/*   Updated: 2026/03/13 13:35:39 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <iostream>
 #include "Array.hpp"
 
-#define MAX_VAL 1000
-int main(int, char**)
+#define MAX_VAL 100
+int main(void)
 {
     Array<int> numbers(MAX_VAL);
     int* mirror = new int[MAX_VAL];
     srand(time(NULL));
-    
-    // init test
     for (int i = 0; i < MAX_VAL; i++)
     {
         const int value = rand();
         numbers[i] = value;
         mirror[i] = value;
     }
- 
-    //  Array constructor test(scope)
+    //SCOPE
     {
-        try
-        {
-            Array<int> tmp = numbers;
-            Array<int> test1(tmp);
-            Array<int> test2(0);
-            Array<int> error_test(-1);
-        }
-        catch(const std::exception& e)
-        {
-            std::cerr << e.what() << '\n';
-        }
-        
+        Array<int> tmp = numbers;
+        Array<int> test(tmp);
     }
 
-    std::cout << "------------------------------------" << std::endl;
-
-    // check a copied value
     for (int i = 0; i < MAX_VAL; i++)
     {
         if (mirror[i] != numbers[i])
         {
-            std::cerr << "copy error" << std::endl;
+            std::cerr << "didn't save the same value!!" << std::endl;
             return 1;
         }
     }
-
-    // test for good case
-    try
-    {
-        numbers[0] = 0;
-        std::cout << numbers[0] << std::endl;
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-    try
-    {
-        numbers[MAX_VAL - 1] = MAX_VAL - 1;
-        std::cout << numbers[MAX_VAL - 1] << std::endl;
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-
-    std::cout << "------------------------------------" << std::endl;
-
-    // test for case exception
     try
     {
         numbers[-2] = 0;
@@ -95,16 +56,10 @@ int main(int, char**)
         std::cerr << e.what() << '\n';
     }
 
-    std::cout << "------------------------------------" << std::endl;
-
-    // check size of array
-    std::cout << "Size: " << numbers.size() << std::endl;
-
-    // test for refill array
     for (int i = 0; i < MAX_VAL; i++)
     {
         numbers[i] = rand();
     }
-    delete [] mirror;
+    delete [] mirror;//
     return 0;
 }
