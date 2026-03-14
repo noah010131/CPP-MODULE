@@ -6,34 +6,27 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 10:23:00 by chanypar          #+#    #+#             */
-/*   Updated: 2026/03/13 13:45:08 by chanypar         ###   ########.fr       */
+/*   Updated: 2026/03/14 19:24:18 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "iter.hpp"
 
-int main(void)
+class Awesome
 {
-	int intArr[] = {1, 2, 3, 4, 5};
-	std::cout << "Original int array: ";
-	iter(intArr, 5, print);
-	std::cout << "\nSquared int array: ";
-	iter(intArr, 5, square);
-	iter(intArr, 5, print);
-	std::cout << "\n\n";
+public:
+Awesome(void) : _n(42) { return; }
+int get(void ) const {return this->_n; } private: int _n;
+};
+std:: ostream & operator<<( std:: ostream & o, Awesome const & rhs) {o << rhs.get(); return o; } 
+template < typename T>
+void print( T const & x) { std::cout << x << std::endl; return; }
+int main() {
+int tab[] = { 0, 1, 2, 3, 4 }; 
 
-	float floatArr[] = {1.1f, 2.2f, 3.3f};
-	std::cout << "Original float array: ";
-	iter(floatArr, 3, print);
-	std::cout << "\nSquared float array: ";
-	iter(floatArr, 3, square);
-	iter(floatArr, 3, print);
-	std::cout << "\n\n";
-
-	std::string strArr[] = {"hello", "42", "paris"};
-	std::cout << "String array: ";
-	iter(strArr, 3, print);
-	std::cout << "\n";
-
-	return 0;
+Awesome tab2[5];
+iter(tab, 5, print);
+iter(tab2, 5, print);
+return 0;
 }
+
