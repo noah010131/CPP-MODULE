@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 10:23:49 by chanypar          #+#    #+#             */
-/*   Updated: 2026/03/14 19:24:28 by chanypar         ###   ########.fr       */
+/*   Updated: 2026/03/15 09:38:27 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 #include <iostream>
 
 template<typename T>
-void iter(T* array, int length, void (*function)(T&))
+void iter(T* array, const size_t length, void (*function)(T&))
 {
 	if (!array || !function)
         return;
-	for (int i = 0; i < length; i++)
+	for (size_t i = 0; i < length; i++)
 		function(array[i]);
 }
 
 template<typename T>
-void iter(const T* array, int length, void (*function)(const T&))
+void iter(const T* array, const size_t length, void (*function)(const T&))
 {
 	if (!array || !function)
         return;
-	for (int i = 0; i < length; i++)
+	for (size_t i = 0; i < length; i++)
 		function(array[i]);
 }

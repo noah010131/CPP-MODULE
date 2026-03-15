@@ -6,11 +6,13 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 10:59:40 by chanypar          #+#    #+#             */
-/*   Updated: 2026/03/13 13:45:03 by chanypar         ###   ########.fr       */
+/*   Updated: 2026/03/14 19:23:07 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "Array.hpp"
 
 #define MAX_VAL 100
@@ -60,6 +62,7 @@ int main(void)
     {
         numbers[i] = rand();
     }
-    delete [] mirror;//
-    return 0;
+    delete [] mirror;
+    
+    return (0);
 }
