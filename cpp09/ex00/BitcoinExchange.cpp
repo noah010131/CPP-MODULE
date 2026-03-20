@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:53:54 by raveriss          #+#    #+#             */
-/*   Updated: 2025/04/28 12:47:08 by chanypar         ###   ########.fr       */
+/*   Updated: 2026/03/19 13:57:15 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,21 +55,23 @@ void BitcoinExchange::loadDatabase(const std::string & filename)
     std::ifstream file(filename.c_str());
     if (!file)
         throw std::runtime_error("Error: could not open file.");
-    std::string line, date;
-    double rate;
-    if (std::getline(file, line))
+
+    std::string line;
+    if (!std::getline(file, line))
+        return;
+    while (std::getline(file, line))
     {
-        if (line != "date,exchange_rate")
-        {
-            std::istringstream ss(line);
-            if (std::getline(ss, date, ',') && (ss >> rate))
-                _exchangeRates[date] = rate;
-        }
-    }
-    while (getline(file, line))
-    {
-        std::stringstream ss(line);
-        if (getline(ss, date, ',') && (ss >> rate))
+        if (line.empty()) continue;
+
+        size_t commaPos = line.find(',');
+        if (commaPos == std::string::npos) continue;
+
+        std::string date = line.substr(0, commaPos);
+        std::string rateStr = line.substr(commaPos + 1);
+
+        char* endPtr;
+        double rate = std::strtod(rateStr.c_str(), &endPtr);
+        if (*endPtr == '\0' || std::isspace(*endPtr))
             _exchangeRates[date] = rate;
     }
 }
@@ -80,7 +82,6 @@ void BitcoinExchange::processInput(const std::string & filename)
     if (!file)
         throw std::runtime_error("Error: could not open file.");
     std::string inputLine, datePart, valuePart;
-    double value;
     bool firstLine = true;
     while (getline(file, inputLine))
     {
@@ -97,7 +98,7 @@ void BitcoinExchange::processInput(const std::string & filename)
         
         firstLine = false;
         std::stringstream ss(inputLine);
-        if (inputLine[11] != '|' || inputLine[10] != ' ' || inputLine[12] != ' ' )
+        if (inputLine.size() < 14 || inputLine[11] != '|' || inputLine[10] != ' ' || inputLine[12] != ' ' )
         {
             inputLine = inputLine.empty() ? "empty" : inputLine;
             std::cout << "Error: bad input => " << inputLine << std::endl;
@@ -117,24 +118,20 @@ void BitcoinExchange::processInput(const std::string & filename)
                 std::cout << "Error: bad input => " << datePart << std::endl;
                 continue;
             }
-            if (!isValidValue(valuePart))
-            {
+            char* endPtr;
+            double value = std::strtod(valuePart.c_str(), &endPtr);
+            
+            if (*endPtr != '\0' && !std::isspace(*endPtr))
+                std::cout << "Error: bad input => " << inputLine << std::endl;
+            else if (value < 0)
                 std::cout << "Error: not a positive number." << std::endl;
-                continue;
-            }
-            value = atof(valuePart.c_str());
-            if (value > 1000)
-            {
+            else if (value > 1000)
                 std::cout << "Error: too large a number." << std::endl;
-                continue;
+            else
+            {
+                double rate = getExchangeRate(datePart);
+                std::cout << datePart << " => " << value << " = " << value * rate << std::endl;
             }
-            double rate = getExchangeRate(datePart);
-            std::cout << datePart << " => " << value << " = " << value * rate << std::endl;
-        }
-        else
-        {
-            inputLine = inputLine.empty() ? "empty" : inputLine;
-            std::cout << "Error: bad input => " << inputLine << std::endl;
         }
     }
 }
@@ -142,12 +139,11 @@ void BitcoinExchange::processInput(const std::string & filename)
 double BitcoinExchange::getExchangeRate(const std::string & date) const
 {
     std::map<std::string, double>::const_iterator it = _exchangeRates.lower_bound(date);
-    if (it == _exchangeRates.end() || it->first != date)
-    {
-        if (it == _exchangeRates.begin())
-			return 0;
-        --it;
-    }
+    if (it != _exchangeRates.end() && it->first == date)
+        return it->second;
+    if (it == _exchangeRates.begin())
+        return 0;
+    --it;
     return it->second;
 }
 
@@ -192,11 +188,3 @@ bool BitcoinExchange::isValidDate(const std::string & date) const
 
     return true;
 }
-
-bool BitcoinExchange::isValidValue(const std::string & value) const
-{
-    char* end;
-    double val = strtod(value.c_str(), &end);
-    return end != value.c_str() && *end == '\0' && val >= 0;
-}
-

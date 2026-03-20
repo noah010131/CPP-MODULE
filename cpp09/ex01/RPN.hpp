@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 15:54:17 by chanypar          #+#    #+#             */
-/*   Updated: 2025/04/28 18:02:39 by chanypar         ###   ########.fr       */
+/*   Updated: 2026/03/19 14:04:59 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <sstream>
 #include <cstring>
 #include <cstdlib>
+#include <cctype>
 
 class RPN
 {

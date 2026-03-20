@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 17:46:12 by chanypar          #+#    #+#             */
-/*   Updated: 2025/04/28 17:58:50 by chanypar         ###   ########.fr       */
+/*   Updated: 2026/03/20 13:19:15 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,46 @@ RPN::~RPN() {}
 
 void RPN::split()
 {
-	std::istringstream ss(this->stringArgv);
-	std::string stringBuffer;
-	std::stack<std::string> tmp;
-	while (std::getline(ss, stringBuffer, ' '))
+    std::istringstream ss(this->stringArgv);
+    std::string token;
+    std::stack<std::string> reverseStack;
+
+    while (ss >> token)
+        reverseStack.push(token);
+    while (!reverseStack.empty())
 	{
-		if (stringBuffer.empty()) continue;
-		tmp.push(stringBuffer);
-	}
-	this->numberOfValues = 0;
-	while (!tmp.empty())
-	{
-		this->splitString.push(tmp.top());
-		validateInput(tmp.top());
-		tmp.pop();
-	}
-	if (2 * this->numberOfValues - this->splitString.size() != 1) throw RPN::Error();
+        validateInput(reverseStack.top());
+        this->splitString.push(reverseStack.top());
+        reverseStack.pop();
+    }
+}
+
+void RPN::calculate()
+{
+    while (!this->splitString.empty())
+    {
+        std::string token = this->splitString.top();
+        this->splitString.pop();
+        if (token.length() == 1 && isOperator(token[0]))
+        {
+            if (this->rpn.size() < 2)
+                throw Error();
+            double b = this->rpn.top(); this->rpn.pop();
+            double a = this->rpn.top(); this->rpn.pop();
+            
+            if (token[0] == '/' && b == 0)
+                throw Error();
+
+            this->rpn.push(calculator(a, b, token[0]));
+        }
+        else if (token.length() == 1 && std::isdigit(token[0]))
+            this->rpn.push(token[0] - '0');
+        else
+            throw Error();
+    }
+    if (this->rpn.size() != 1) 
+        throw Error();
+    std::cout << this->rpn.top() << std::endl;
 }
   
 void RPN::validateInput(std::string s)
@@ -82,32 +106,6 @@ double RPN::calculator(double a, double b, char op)
 	if (b == 0) throw RPN::Error();
 	return (a / b);
 }
-  
-void RPN::calculate()
-{
-	while (!this->splitString.empty())
-	{
-		std::string tmp = this->splitString.top();
-		if (isOperator(tmp[0]))
-		{
-			if (this->rpn.size() < 2) throw RPN::Error();
-			double a, b;
-			b = this->rpn.top();
-			this->rpn.pop();
-			a = this->rpn.top();
-			this->rpn.pop();
-			this->rpn.push(this->calculator(a, b, tmp[0]));
-			this->splitString.pop();
-		}
-		else
-		{
-			double value = std::strtod(this->splitString.top().c_str(), NULL);
-			this->rpn.push(value);
-			this->splitString.pop();
-	  	}
-	}
-	std::cout << this->rpn.top() << std::endl;
-}
 
 void RPN::play()
 {
@@ -118,7 +116,7 @@ void RPN::play()
 	}
 	catch (std::exception& e)
 	{
-		std::cout << e.what() << std::endl;
+		std::cerr << e.what() << std::endl;
 	}
 }
 const char* RPN::Error::what() const throw()

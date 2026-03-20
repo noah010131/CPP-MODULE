@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 18:27:14 by chanypar          #+#    #+#             */
-/*   Updated: 2025/04/28 18:52:39 by chanypar         ###   ########.fr       */
+/*   Updated: 2026/03/19 14:22:30 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,44 +16,37 @@
 #include <vector>
 #include <deque>
 #include <string>
-#include <sstream>
-#include <ctime>
-#include <cstdlib>
-#include <stdexcept>
-#include <iomanip>
+#include <algorithm>
 #include <ctime>
 #include <sys/time.h>
+#include <iomanip>
+#include <sstream>
 
 class PmergeMe
 {
-	private:
-    	std::vector<int> vectorData;
-    	std::deque<int> dequeData;
+    private:
+        std::vector<int> _vec;
+        std::deque<int> _deq;
 
-	    void mergeInsertSortVector(std::vector<int>& v);
-	    void mergeInsertSortDeque(std::deque<int>& d);
-
-	    void mergeVector(std::vector<int>& v, int left, int right);
-    	void mergeDeque(std::deque<int>& d, int left, int right);
+        std::vector<int> generateJacobsthal(int n);
     
-	    void insertionSortVector(std::vector<int>& v, int left, int right);
-    	void insertionSortDeque(std::deque<int>& d, int left, int right);
+        void sortVector(std::vector<int>& v);
+        void sortDeque(std::deque<int>& d);
 
-    	void checkInput(char* av[]);
-    	bool isPositiveInteger(const std::string& s);
-    	void printSequence(const std::string& msg, const std::vector<int>& v);
+        bool isPositiveInteger(const std::string& s);
+        void printSequence(const std::string& msg, const std::vector<int>& v);
 
-	public:
-    	PmergeMe();
-    	PmergeMe(char* av[]);
-    	PmergeMe(const PmergeMe& ref);
-    	PmergeMe& operator=(const PmergeMe& ref);
-		~PmergeMe();
-		void run();
-    	class Error : public std::exception
-    	{
-    		public:
-        		virtual const char* what() const throw();
-    	};
+    public:
+        PmergeMe();
+        PmergeMe(const PmergeMe& ref);
+        PmergeMe& operator=(const PmergeMe& ref);
+        ~PmergeMe();
+    
+        void run(int ac, char** av);
+    
+        class Error : public std::exception
+        {
+            public:
+                virtual const char* what() const throw();
+        };
 };
-

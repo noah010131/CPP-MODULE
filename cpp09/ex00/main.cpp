@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:54:15 by raveriss          #+#    #+#             */
-/*   Updated: 2025/04/28 12:48:04 by chanypar         ###   ########.fr       */
+/*   Updated: 2026/03/18 12:07:00 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int main(int ac, char **av)
 {
     if (ac != 2)
     {
-        std::cerr << "Usage: ./btc input.txt" << std::endl;
+        std::cerr << "Error: could not open file." << std::endl;
         return 1;
     }
     try

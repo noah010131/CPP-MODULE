@@ -6,21 +6,21 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 18:28:12 by chanypar          #+#    #+#             */
-/*   Updated: 2025/04/28 18:28:21 by chanypar         ###   ########.fr       */
+/*   Updated: 2026/03/18 12:45:41 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
-int main(int argc, char* argv[])
+int main(int ac, char** av)
 {
     try
     {
-        if (argc < 2)
+        if (ac < 2)
             throw PmergeMe::Error();
 
-        PmergeMe pmerge(argv);
-        pmerge.run();
+        PmergeMe pmerge;
+        pmerge.run(ac, av);
     }
     catch (std::exception& e)
     {
