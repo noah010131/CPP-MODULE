@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 17:46:12 by chanypar          #+#    #+#             */
-/*   Updated: 2026/03/23 17:40:11 by chanypar         ###   ########.fr       */
+/*   Updated: 2026/03/23 17:46:53 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void RPN::calculate()
         else
             throw Error();
     }
-    if (this->rpn.size() != 1) 
+    if (this->rpn.size() != 1)
         throw Error();
     std::cout << this->rpn.top() << std::endl;
 }
