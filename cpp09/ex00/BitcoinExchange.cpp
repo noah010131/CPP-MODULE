@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:53:54 by raveriss          #+#    #+#             */
-/*   Updated: 2026/03/19 13:57:15 by chanypar         ###   ########.fr       */
+/*   Updated: 2026/03/23 17:20:43 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,15 @@ void BitcoinExchange::processInput(const std::string & filename)
                 std::cout << "Error: bad input => " << datePart << std::endl;
                 continue;
             }
+			std::string vLower = valuePart;
+			for (size_t i = 0; i < vLower.length(); ++i)
+			    vLower[i] = std::tolower(vLower[i]);
+					
+			if (vLower.find("nan") != std::string::npos || vLower.find("inf") != std::string::npos)
+			{
+			    std::cout << "Error: bad input => " << inputLine << std::endl;
+			    continue;
+			}
             char* endPtr;
             double value = std::strtod(valuePart.c_str(), &endPtr);
             
@@ -130,7 +139,10 @@ void BitcoinExchange::processInput(const std::string & filename)
             else
             {
                 double rate = getExchangeRate(datePart);
-                std::cout << datePart << " => " << value << " = " << value * rate << std::endl;
+				if (rate >= 0)
+                	std::cout << datePart << " => " << value << " = " << value * rate << std::endl;
+				else
+					std::cout << "Error: bad input => " << datePart << std::endl;
             }
         }
     }
@@ -142,7 +154,7 @@ double BitcoinExchange::getExchangeRate(const std::string & date) const
     if (it != _exchangeRates.end() && it->first == date)
         return it->second;
     if (it == _exchangeRates.begin())
-        return 0;
+		return (-1.0);
     --it;
     return it->second;
 }
@@ -166,9 +178,23 @@ bool BitcoinExchange::isValidDate(const std::string & date) const
         if (!isdigit(date[i]))
             return false;
     }
-    int year = atoi(date.substr(0, 4).c_str());
-    int month = atoi(date.substr(5, 2).c_str());
-    int day = atoi(date.substr(8, 2).c_str());
+   char* endPtr;
+
+	// Year 추출 (인덱스 0부터 4글자)
+	double dYear = std::strtod(date.substr(0, 4).c_str(), &endPtr);
+	if (*endPtr != '\0')
+		return (false);
+	int year = static_cast<int>(dYear);
+	
+	double dMonth = std::strtod(date.substr(5, 2).c_str(), &endPtr);
+	if (*endPtr != '\0') 
+		return (false);
+	int month = static_cast<int>(dMonth);
+
+	double dDay = std::strtod(date.substr(8, 2).c_str(), &endPtr);
+	if (*endPtr != '\0')
+		return (false);
+	int day = static_cast<int>(dDay);
     if (month < 1 || month > 12)
         return false;
     if (day < 1 || day > 31)
