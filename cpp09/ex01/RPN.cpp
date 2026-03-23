@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 17:46:12 by chanypar          #+#    #+#             */
-/*   Updated: 2026/03/20 13:19:15 by chanypar         ###   ########.fr       */
+/*   Updated: 2026/03/23 17:40:11 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,7 @@ void RPN::validateInput(std::string s)
 		return ;
 	char *ptr = NULL;
 	double value = std::strtod(s.c_str(), &ptr);
-	if (value == 0.0 && !std::isdigit(s[0])) throw RPN::Error();
-	if (*ptr && std::strcmp(ptr, "f")) throw RPN::Error();
+	if ((value == 0.0 && !std::isdigit(s[0])) || *ptr) throw RPN::Error();
 	if (value < 0 || value >= 10) throw RPN::Error();
 	++this->numberOfValues;
 }
