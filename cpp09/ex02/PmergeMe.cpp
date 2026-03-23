@@ -33,17 +33,8 @@ bool PmergeMe::isPositiveInteger(const std::string& s)
 {
     if (s.empty())
         return false;
-    size_t i = 0;
-    if (s[i] == '+')
-    {
-        if (s.size() == 1) return false; 
-        i++;
-    }
-    for (; i < s.size(); ++i)
-    {
-        if (!isdigit(s[i]))
-            return false;
-    }
+    for (size_t i = 0; i < s.size(); ++i)
+        if (!isdigit(s[i])) return false;
     return true;
 }
 
@@ -202,11 +193,11 @@ void PmergeMe::run(int ac, char** av)
         for (int i = 1; i < ac; ++i)
         {
             std::string s(av[i]);
-            if (!isPositiveInteger(s))
-                throw Error();
-            long val = std::atol(s.c_str());
-            if (val > 2147483647 || val < 0)
-                throw Error();
+            if (!isPositiveInteger(s)) throw Error();
+        	char *ptr = NULL;
+			long val = std::strtol(s.c_str(), &ptr, 10);
+			if (*ptr != '\0' || ptr == s.c_str()) throw Error();
+			if (val > 2147483647 || val < 0) throw Error();
             _vec.push_back(static_cast<int>(val));
             _deq.push_back(static_cast<int>(val));
         }
