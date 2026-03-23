@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:53:54 by raveriss          #+#    #+#             */
-/*   Updated: 2026/03/23 17:20:43 by chanypar         ###   ########.fr       */
+/*   Updated: 2026/03/23 17:37:29 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,9 +178,7 @@ bool BitcoinExchange::isValidDate(const std::string & date) const
         if (!isdigit(date[i]))
             return false;
     }
-   char* endPtr;
-
-	// Year 추출 (인덱스 0부터 4글자)
+   	char* endPtr;
 	double dYear = std::strtod(date.substr(0, 4).c_str(), &endPtr);
 	if (*endPtr != '\0')
 		return (false);
